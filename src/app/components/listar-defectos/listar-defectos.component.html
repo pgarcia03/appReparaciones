@@ -1,0 +1,29 @@
+<div class="card"> 
+    <p-table [value]="reparaciones"  > 
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:3rem">#</th>
+                <th>Operacion</th>
+                <th>Defecto</th>
+                <th>Country</th>
+            
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-reparacion let-rowIndex="rowIndex">
+            <tr>
+                <td>{{rowIndex+1}}</td>             
+                <td *ngIf="rowGroupMetadata[reparacion.posicion].index === rowIndex" [attr.rowspan]="rowGroupMetadata[reparacion.posicion].size" >      
+                    <span class="p-text-bold p-ml-2">{{reparacion.posicion}}</span>
+                </td>
+                <td>                 
+                    {{reparacion.defecto}}
+                </td>
+                <td>
+                  
+                    <button pButton type="button" icon="pi pi-plus-circle" iconPos="left" class="p-button-raised p-button-rounded"></button>
+                    <button pButton type="button" icon="pi pi-trash"  class="p-button-raised  p-button-danger p-button-rounded"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
