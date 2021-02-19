@@ -1,2 +1,13 @@
 <p>Corte</p>
-<p-autoComplete [(ngModel)]="text" [suggestions]="results" field="corte" (completeMethod)="search($event)" (onSelect)="test($event)"></p-autoComplete>
+
+<div class="p-grid">
+    <div class="p-col-6">
+        <p-autoComplete [(ngModel)]="text" [minLength]="3" [suggestions]="results" field="corte" (completeMethod)="search($event)" (onSelect)="corteSeleccionado($event)"></p-autoComplete>
+    </div>
+    <div class="p-col-6">
+        <span class="p-float-label">
+            <input id="float-input" type="text" [(ngModel)]="desc" (blur)="CambioDesc(desc)" pInputText> 
+            <label for="float-input">Desc</label>
+        </span>
+    </div>
+</div>

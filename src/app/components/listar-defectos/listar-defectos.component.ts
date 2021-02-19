@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Iporder } from 'src/app/interfaces/iporder';
+import { EventosService } from 'src/app/services/eventos.service';
 
 import { ReparacionService } from 'src/app/services/reparacion.service';
 
@@ -9,31 +11,92 @@ import { ReparacionService } from 'src/app/services/reparacion.service';
 })
 export class ListarDefectosComponent implements OnInit {
 
-  id:number=2;  
+  @Input() id:number=0;
+//  @Input() po:any=[];  
 
   reparaciones: any=[];
 
   rowGroupMetadata: any;
 
-  constructor(private reparacionService: ReparacionService) { }
+  constructor(private reparacionService: ReparacionService,public evento:EventosService) { }
 
   ngOnInit() {
-      this.reparacionService.get(this.id).subscribe(data => {
-          this.reparaciones = data;
-          this.updateRowGroupMetaData();
+
+      this.evento.$estado.subscribe(val => {
+        this.reparacionService.getdesc(this.id,val,this.evento.porder.corte).subscribe(data => {
+            this.reparaciones = data;
+            this.updateRowGroupMetaData();
+  
+        });
       });
+      
+     
   }
 
- 
+  aumento(obj:any)
+  {
+ //   console.log(this.evento.porder.corte)
+
+  //  console.log(obj.id);
+
+    let data:any={
+        id: obj.id,
+        idPosicion:obj.idPosicion ,
+        idDefecto: obj.idDefecto,
+        inspector: "mod2",
+        corte: this.evento.porder.corte,
+        color: "prueba"
+    }
+
+    this.reparacionService.create(data)
+                          .subscribe(response=>{
+                                         //console.log(response);
+
+                                         this.evento.contador=response.unidadestotal
+
+                                         this.reparacionService.getdesc(this.id,this.evento.desc,this.evento.porder.corte).subscribe(data => {
+                                          this.reparaciones = data;
+                                          this.updateRowGroupMetaData();
+                                
+                                         });
+                                   },error=>{
+                                         console.log(error);
+                                   }
+    );
+
+  }
+
+  eliminar(obj:any)
+  {
+    let data:any={
+      id: obj.id,
+      corte: this.evento.porder.corte,
+      inspector:"mod2E"
+       }
+
+       this.reparacionService.delete(data.id,data.corte,data.inspector)
+                             .subscribe(response=>{
+                                this.evento.contador=response.unidadestotal
+                                this.reparacionService.getdesc(this.id,this.evento.desc,this.evento.porder.corte).subscribe(data => {
+                                  this.reparaciones = data;
+                                  this.updateRowGroupMetaData();
+                        
+                                 });
+                              },
+                                        error=>{console.log(error)}
+                              );
+
+  }
+
   updateRowGroupMetaData() {
       this.rowGroupMetadata = {};
 
       if (this.reparaciones) {
-         console.log(this.reparaciones);
+      
           for (let i = 0; i < this.reparaciones.length; i++) {
               let rowData = this.reparaciones[i];
               let representativeName = rowData.posicion;
-              console.log(representativeName);
+            
               if (i == 0) {
                   this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
               }
@@ -50,7 +113,6 @@ export class ListarDefectosComponent implements OnInit {
                      }
               }
 
-              console.log(this.rowGroupMetadata);
           }
       }
   }

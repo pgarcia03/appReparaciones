@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventosService } from 'src/app/services/eventos.service';
 
 @Component({
   selector: 'app-contador',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContadorComponent implements OnInit {
 
-  constructor() { }
+
+ // contador:number=5;
+  constructor(public servicio:EventosService ) { }
 
   ngOnInit(): void {
+
+   // this.servicio.contador;
   }
 
 }

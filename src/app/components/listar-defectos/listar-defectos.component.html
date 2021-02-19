@@ -1,12 +1,14 @@
 <div class="card"> 
-    <p-table [value]="reparaciones"  > 
+
+  
+    <p-table [value]="reparaciones" styleClass="p-datatable-striped" > 
         <ng-template pTemplate="header">
             <tr>
                 <th style="width:3rem">#</th>
                 <th>Operacion</th>
                 <th>Defecto</th>
-                <th>Country</th>
-            
+                <th>Cantidad</th>
+                <th>Comandos</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-reparacion let-rowIndex="rowIndex">
@@ -19,9 +21,12 @@
                     {{reparacion.defecto}}
                 </td>
                 <td>
+                    {{reparacion.cantidad}}
+                </td>
+                <td>
                   
-                    <button pButton type="button" icon="pi pi-plus-circle" iconPos="left" class="p-button-raised p-button-rounded"></button>
-                    <button pButton type="button" icon="pi pi-trash"  class="p-button-raised  p-button-danger p-button-rounded"></button>
+                    <button pButton type="button" icon="pi pi-plus-circle" class="p-button-rounded" (click)="aumento(reparacion)"></button>
+                    <button pButton type="button" icon="pi pi-trash"  class="p-button-rounded p-button-danger" (click)="eliminar(reparacion)"></button>
                 </td>
             </tr>
         </ng-template>

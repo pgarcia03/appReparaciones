@@ -1,1 +1,20 @@
-<p>tabs-content works!</p>
+
+<div class="p-grid">
+    <div class="p-col-8"> <app-autocomplete></app-autocomplete></div>
+    
+    <div class="p-col-4"> <app-contador></app-contador></div>
+</div>
+
+<div >
+    <p-tabView>
+        <p-tabPanel header="Delantero">     
+         <app-listar-defectos [id]="1"  > </app-listar-defectos>
+        </p-tabPanel>
+        <p-tabPanel header="Trasero">
+            <app-listar-defectos [id]="2" > </app-listar-defectos>
+        </p-tabPanel>
+        <p-tabPanel header="Ensamble">
+            <app-listar-defectos  [id]="6" > </app-listar-defectos>
+        </p-tabPanel>
+    </p-tabView>
+</div>

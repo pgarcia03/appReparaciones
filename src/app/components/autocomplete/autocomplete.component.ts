@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Iporder } from 'src/app/interfaces/iporder';
+import { EventosService } from 'src/app/services/eventos.service';
 import { PorderService } from 'src/app/services/porder.service';
 
 @Component({
@@ -9,10 +11,12 @@ import { PorderService } from 'src/app/services/porder.service';
 export class AutocompleteComponent implements OnInit {
 
   text: string='';
-
+  desc:string='';
   results:any=[];
 
-  constructor(private po:PorderService) {  }
+ // @Output() seleccion=new EventEmitter<any>();
+
+  constructor(private po:PorderService,public evento:EventosService) {  }
 
   ngOnInit(): void {
   }
@@ -20,12 +24,24 @@ export class AutocompleteComponent implements OnInit {
   search(event:any) {
     this.po.get(event.query,1).subscribe(data => {
         this.results = data;
-        console.log(this.results);
+      //  console.log(this.results);
     });
   }
 
    
-  test(event:any) {
-    console.log(event);
+  corteSeleccionado(event:any) {   
+
+     // this.seleccion.emit({ corte:event.corte,descr:event.descr,estilo:"ok" });
+
+      this.evento.porder.corte=event.corte;
+
+      this.evento.estadoDesc(event.descr);
+      this.desc=event.descr;
+
+  }
+
+  CambioDesc(des:string)
+  {
+    this.evento.estadoDesc(des); 
   }
 }

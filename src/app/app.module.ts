@@ -1,22 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { ListarDefectosComponent } from './components/listar-defectos/listar-defectos.component';
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { ContadorComponent } from './components/contador/contador.component';
-import { TabsComponent } from './components/tabs/tabs.component';
 import { TabsContentComponent } from './components/tabs-content/tabs-content.component';
+import { HeaderComponent } from './components/header/header.component';
 
 import {TableModule} from 'primeng/table';
 import {TabViewModule} from 'primeng/tabview';
 import {ButtonModule} from 'primeng/button';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import {BadgeModule} from 'primeng/badge';
+import {InputTextModule} from 'primeng/inputtext';
+
 /*-
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
@@ -37,25 +39,23 @@ import {InputTextModule} from 'primeng/inputtext';
     ListarDefectosComponent,
     AutocompleteComponent,
     ContadorComponent,
-    TabsComponent,
-    TabsContentComponent
-
-
-    
+    TabsContentComponent,
+    HeaderComponent
    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-
     FormsModule,
     HttpClientModule,
 
     TableModule,
     TabViewModule,
     ButtonModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    BadgeModule,
+    InputTextModule
   ],
   providers: [],
   bootstrap: [AppComponent]
