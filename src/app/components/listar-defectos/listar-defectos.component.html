@@ -1,6 +1,4 @@
 <div class="card"> 
-
-  
     <p-table [value]="reparaciones" styleClass="p-datatable-striped" > 
         <ng-template pTemplate="header">
             <tr>
@@ -25,7 +23,8 @@
                 </td>
                 <td>
                   
-                    <button pButton type="button" icon="pi pi-plus-circle" class="p-button-rounded" (click)="aumento(reparacion)"></button>
+                    <button pButton type="button" icon="pi pi-plus-circle" class="p-button-rounded p-mr-2" (click)="aumento(reparacion)"></button>
+
                     <button pButton type="button" icon="pi pi-trash"  class="p-button-rounded p-button-danger" (click)="eliminar(reparacion)"></button>
                 </td>
             </tr>

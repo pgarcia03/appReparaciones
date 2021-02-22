@@ -19,7 +19,13 @@ export class ReparacionService {
     return this.http.get(`${baseUrl}/${id}`);
   }
 
+  getTotal(corte:string):Observable<any>{
+
+    return  this.http.get(`${baseUrl}/${corte}`);
+  }
+
   getdesc(id:any,desc:any,corte:any):Observable<any>{
+    
     return this.http.get(`${baseUrl}/${id}&${desc}&${corte}`);
   }
 

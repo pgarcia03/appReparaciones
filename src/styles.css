@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+   color: #fff;
+   min-height:120px ;
+   background: #2d75c2;
+   padding: 1rem;
+}
+
+h1{
+   margin: 0;
+}
+
+
+
+section{
+    min-height: 750px;
+   
+    padding: 1em;
+}
+
+#afFooter{
+background: #000000;
+border-top: 5px solid #2d75c2;
+min-height: 30px;
+text-align: center;
+color: rgba(173,168,173,1);
+}

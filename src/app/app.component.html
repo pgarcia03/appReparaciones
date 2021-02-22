@@ -1,12 +1,19 @@
 
-<app-header></app-header>
-<h1>Registro de Reparaciones</h1>
-<div class="card">
-<div >
-   <app-tabs-content></app-tabs-content>
-</div>
-<div>
-  <router-outlet></router-outlet>
-</div>
- 
+
+<p-messages severity="info">
+  <ng-template pTemplate> 
+    <img src="assets/logo1.png" width="80" />  
+      <div class="p-ml-2">
+        Registro de Reparaciones
+      </div>
+  </ng-template>
+</p-messages>
+
+<div class="card p-mt-4">
+  <div >
+    <app-tabs-content></app-tabs-content>
+  </div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
 </div>

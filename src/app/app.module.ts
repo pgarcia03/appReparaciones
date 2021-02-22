@@ -10,7 +10,7 @@ import { ListarDefectosComponent } from './components/listar-defectos/listar-def
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { ContadorComponent } from './components/contador/contador.component';
 import { TabsContentComponent } from './components/tabs-content/tabs-content.component';
-import { HeaderComponent } from './components/header/header.component';
+
 
 import {TableModule} from 'primeng/table';
 import {TabViewModule} from 'primeng/tabview';
@@ -18,6 +18,9 @@ import {ButtonModule} from 'primeng/button';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {BadgeModule} from 'primeng/badge';
 import {InputTextModule} from 'primeng/inputtext';
+import {DividerModule} from 'primeng/divider';
+import {MessagesModule} from 'primeng/messages';
+
 
 /*-
 import {TableModule} from 'primeng/table';
@@ -39,8 +42,8 @@ import {InputTextModule} from 'primeng/inputtext';
     ListarDefectosComponent,
     AutocompleteComponent,
     ContadorComponent,
-    TabsContentComponent,
-    HeaderComponent
+    TabsContentComponent
+    
    
   ],
   imports: [
@@ -55,7 +58,9 @@ import {InputTextModule} from 'primeng/inputtext';
     ButtonModule,
     AutoCompleteModule,
     BadgeModule,
-    InputTextModule
+    InputTextModule,
+    DividerModule,
+    MessagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

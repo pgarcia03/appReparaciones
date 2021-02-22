@@ -12,7 +12,6 @@ import { ReparacionService } from 'src/app/services/reparacion.service';
 export class ListarDefectosComponent implements OnInit {
 
   @Input() id:number=0;
-//  @Input() po:any=[];  
 
   reparaciones: any=[];
 
@@ -21,13 +20,16 @@ export class ListarDefectosComponent implements OnInit {
   constructor(private reparacionService: ReparacionService,public evento:EventosService) { }
 
   ngOnInit() {
-
       this.evento.$estado.subscribe(val => {
+        if (this.evento.porder.corte!='' && val!='')
         this.reparacionService.getdesc(this.id,val,this.evento.porder.corte).subscribe(data => {
             this.reparaciones = data;
+
             this.updateRowGroupMetaData();
   
         });
+        else
+        this.reparaciones=[];
       });
       
      
@@ -35,9 +37,6 @@ export class ListarDefectosComponent implements OnInit {
 
   aumento(obj:any)
   {
- //   console.log(this.evento.porder.corte)
-
-  //  console.log(obj.id);
 
     let data:any={
         id: obj.id,
@@ -45,18 +44,18 @@ export class ListarDefectosComponent implements OnInit {
         idDefecto: obj.idDefecto,
         inspector: "mod2",
         corte: this.evento.porder.corte,
-        color: "prueba"
+        color: this.evento.porder.color
     }
 
     this.reparacionService.create(data)
                           .subscribe(response=>{
-                                         //console.log(response);
-
-                                         this.evento.contador=response.unidadestotal
+                                        
+                                         this.evento.contador=response.unidadestotal;
 
                                          this.reparacionService.getdesc(this.id,this.evento.desc,this.evento.porder.corte).subscribe(data => {
-                                          this.reparaciones = data;
-                                          this.updateRowGroupMetaData();
+                                         this.reparaciones = data;
+                                         
+                                         this.updateRowGroupMetaData();
                                 
                                          });
                                    },error=>{
@@ -76,14 +75,17 @@ export class ListarDefectosComponent implements OnInit {
 
        this.reparacionService.delete(data.id,data.corte,data.inspector)
                              .subscribe(response=>{
+                               
                                 this.evento.contador=response.unidadestotal
+                               
                                 this.reparacionService.getdesc(this.id,this.evento.desc,this.evento.porder.corte).subscribe(data => {
+                                
                                   this.reparaciones = data;
                                   this.updateRowGroupMetaData();
                         
                                  });
                               },
-                                        error=>{console.log(error)}
+                                       error=>{console.log(error)}
                               );
 
   }
@@ -92,11 +94,11 @@ export class ListarDefectosComponent implements OnInit {
       this.rowGroupMetadata = {};
 
       if (this.reparaciones) {
-      
+  
           for (let i = 0; i < this.reparaciones.length; i++) {
               let rowData = this.reparaciones[i];
               let representativeName = rowData.posicion;
-            
+             
               if (i == 0) {
                   this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
               }
@@ -114,6 +116,8 @@ export class ListarDefectosComponent implements OnInit {
               }
 
           }
+          
+
       }
   }
 
